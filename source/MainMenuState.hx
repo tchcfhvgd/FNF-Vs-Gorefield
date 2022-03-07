@@ -301,11 +301,11 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('pressStorymode'));
 					gorefield.animation.play('jeje');
-					gorefield.offset.y = 35;
+					gorefield.offset.y = 45;
 					gorefield.offset.x = -25;
 					gorefield.x = 250;
 					FlxG.sound.music.stop();
-					FlxG.camera.flash(FlxColor.BLACK, 1);
+					FlxG.camera.flash(FlxColor.WHITE, 1);
 					menuInfomation.text = "WARNING, YOU ARE APPROACHING GOREFIELD!!";
 					if(ClientPrefs.language) menuInfomation.text = "ADVERTENCIA, ¡¡SE ESTÁ ACERCANDO A GOREFIELD!!";
 					menuInfomation.color = FlxColor.RED;
@@ -351,13 +351,7 @@ class MainMenuState extends MusicBeatState
 					{
 						if (curSelected != spr.ID)
 						{
-							FlxTween.tween(spr, {alpha: 0}, 0.4, {
-								ease: FlxEase.quadOut,
-								onComplete: function(twn:FlxTween)
-								{
-									spr.kill();
-								}
-							});
+							FlxTween.tween(spr, {"x": -1000}, 1, {ease: FlxEase.linear});
 						}
 						else
 						{
@@ -367,8 +361,6 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
 									case 'credits':
