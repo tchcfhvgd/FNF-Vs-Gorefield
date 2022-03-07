@@ -41,7 +41,6 @@ class MainMenuState extends MusicBeatState
 	];
 
 	var debugKeys:Array<FlxKey>;
-	var magenta:FlxSprite;
 	var logoBl:FlxSprite;
 	var camFollow:FlxObject;
 	var gorefield:FlxSprite;
@@ -52,6 +51,10 @@ class MainMenuState extends MusicBeatState
 	var versionShit:FlxText;
 	var versionGore:FlxText;
 	var bg:FlxSprite;
+	var startcutscene:FlxSprite;
+	var allowinput:Bool = false;
+
+	public static var seencutscene:Bool = false;
 
 	override function create()
 	{
@@ -90,16 +93,6 @@ class MainMenuState extends MusicBeatState
 		add(camFollow);
 		add(camFollowPos);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
-		magenta.scrollFactor.set(0, yScroll);
-		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
-		magenta.updateHitbox();
-		magenta.screenCenter();
-		magenta.visible = false;
-		magenta.antialiasing = ClientPrefs.globalAntialiasing;
-		magenta.color = 0xFFfd719b;
-		add(magenta);
-
 		fire = new FlxSprite(-80);
 		fire.frames = Paths.getSparrowAtlas('fire');
 		fire.antialiasing = ClientPrefs.globalAntialiasing;
@@ -116,11 +109,12 @@ class MainMenuState extends MusicBeatState
 		logoBl.setGraphicSize(Std.int(logoBl.width * 0.60));
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
+		logoBl.visible = false;
 		add(logoBl);
 
 		FlxTween.tween(logoBl, {y: logoBl.y + 5}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 
-		gorefield = new FlxSprite(540, 30);
+		gorefield = new FlxSprite(589, 40);
 		gorefield.frames = Paths.getSparrowAtlas('GorefieldMENU');
 		gorefield.antialiasing = true;
 		gorefield.animation.addByPrefix('idle', 'MenuIdle', 24);
@@ -128,6 +122,7 @@ class MainMenuState extends MusicBeatState
 		gorefield.setGraphicSize(Std.int(gorefield.width * 1));
 		gorefield.animation.play('idle');
 		gorefield.updateHitbox();
+		gorefield.visible = false;
 		add(gorefield);
 		
 		// magenta.scrollFactor.set();
@@ -139,6 +134,7 @@ class MainMenuState extends MusicBeatState
 		menuInfomation.setFormat("Pixel-Art Regular", 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		menuInfomation.scrollFactor.set(0, 0);
 		menuInfomation.borderSize = 2;
+		menuInfomation.visible = false;
 		add(menuInfomation);
 
 		var scale:Float = 1;
@@ -157,15 +153,26 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			//menuItem.screenCenter(X);
-			menuItem.x = -8;
+			menuItem.x = 2;
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			menuItem.setGraphicSize(Std.int(menuItem.width * 0.70));
+			menuItem.setGraphicSize(Std.int(menuItem.width * 0.90));
 			menuItem.updateHitbox();
+			menuItem.x -= menuItem.width;
+
+			switch(i)
+			{
+				case 0:
+					menuItem.x -= 16;	
+				case 1:
+					menuItem.x -= 22;	
+				case 3:
+					menuItem.x -= 23.5;
+			}
+			menuItem.visible = false;
 		}
 
 		//FlxG.camera.follow(camFollowPos, null, 1);
@@ -173,30 +180,76 @@ class MainMenuState extends MusicBeatState
 		versionShit = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("Pixel-Art Regular", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.visible = false;
 		add(versionShit);
 		versionGore = new FlxText(12, FlxG.height - 24, 0, "Vs Gorefield v1.0", 12);
 		versionGore.scrollFactor.set();
 		versionGore.setFormat("Pixel-Art Regular", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionGore.visible = false;
 		add(versionGore);
-
-		// NG.core.calls.event.logEvent('swag').send();
 
 		changeItem();
 
-		#if ACHIEVEMENTS_ALLOWED
-		Achievements.loadAchievements();
-		var leDate = Date.now();
-		if (leDate.getDay() == 5 && leDate.getHours() >= 18) {
-			var achieveID:Int = Achievements.getAchievementIndex('friday_night_play');
-			if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
-				Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
-				giveAchievement();
-				ClientPrefs.saveSettings();
+		startcutscene = new FlxSprite();
+		startcutscene.frames = Paths.getSparrowAtlas('Garfield_menu_startup');
+		startcutscene.animation.addByPrefix('start up', 'GARFIELD', 24, false);
+		startcutscene.updateHitbox();
+		startcutscene.screenCenter();
+		startcutscene.visible = false;
+		add(startcutscene);	
+		if (!seencutscene) {
+			new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+				startcutscene.animation.play('start up');
+				startcutscene.visible = true;
+			});
+				
+			startcutscene.animation.finishCallback = function (name:String) 
+			{
+				seencutscene = true;
+				startcutscene.visible = false;
+				remove(startcutscene);
+				logoBl.visible = true;
+				menuInfomation.visible = true;
+				versionGore.visible = true;
+				versionShit.visible = true;
+				gorefield.visible = true;
+				menuItems.forEach(function(spr:FlxSprite)
+				{
+					spr.visible = true;
+					FlxTween.tween(spr, {x: spr.x + spr.width}, 0.7, {
+						onComplete: function(twn:FlxTween) 
+						{
+							allowinput = true;
+						}
+					});	
+				});
 			}
+		} 
+		else 
+		{
+			startcutscene.visible = false;
+			remove(startcutscene);
+			logoBl.visible = true;
+			menuInfomation.visible = true;
+			versionGore.visible = true;
+			versionShit.visible = true;
+			gorefield.visible = true;
+			menuItems.forEach(function(spr:FlxSprite)
+			{
+				spr.visible = true;
+				spr.x = spr.x + spr.width;
+				allowinput = true;
+			});
 		}
-		#end
+
+	
 
 		super.create();
+		
+		menuItems.forEach(function(spr:FlxSprite)
+			{
+				//spr.screenCenter(X);
+			});
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
@@ -220,7 +273,7 @@ class MainMenuState extends MusicBeatState
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-		if (!selectedSomethin)
+		if (!selectedSomethin && allowinput)
 		{
 			if (controls.UI_UP_P)
 			{
@@ -248,6 +301,8 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('pressStorymode'));
 					gorefield.animation.play('jeje');
+					gorefield.offset.y = 35;
+					gorefield.offset.x = -25;
 					gorefield.x = 250;
 					FlxG.sound.music.stop();
 					FlxG.camera.flash(FlxColor.BLACK, 1);
@@ -291,8 +346,6 @@ class MainMenuState extends MusicBeatState
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
-
-					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
@@ -338,11 +391,6 @@ class MainMenuState extends MusicBeatState
 		}
 
 		super.update(elapsed);
-
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			//spr.screenCenter(X);
-		});
 	}
 
 	function changeItem(huh:Int = 0)
