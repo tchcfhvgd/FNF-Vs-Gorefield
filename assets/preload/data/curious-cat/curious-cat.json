@@ -3463,14 +3463,44 @@
 				"bpm": 120
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 120,
 				"changeBPM": false,
 				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 120,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 120
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 120
 			},
 			{
 				"gfSection": false,
@@ -3483,7 +3513,7 @@
 				"mustHitSection": true
 			}
 		],
-		"gfVersion": "gf",
+		"gfVersion": "gf-invisible",
 		"events": [
 			[
 				0,
@@ -3510,6 +3540,7 @@
 		"song": "Curious Cat",
 		"validScore": true,
 		"needsVoices": true,
+		"stage": "horror",
 		"speed": 2.5,
 		"bpm": 120
 	}

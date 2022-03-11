@@ -215,6 +215,10 @@ class PlayState extends MusicBeatState
 	var santa:BGSprite;
 	var heyTimer:Float;
 
+	//Sprites Gorefield
+	var bgHorror:BGSprite;
+	var jon:FlxSprite;
+
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 	var bgGhouls:BGSprite;
@@ -421,6 +425,17 @@ class PlayState extends MusicBeatState
 					stageCurtains.updateHitbox();
 					add(stageCurtains);
 				}
+			
+			case 'horror': //Week Gorefield
+				bgHorror = new BGSprite('stages/BG', -300, -620);
+				bgHorror.antialiasing = ClientPrefs.globalAntialiasing;
+				add(bgHorror);
+
+				jon = new FlxSprite(450, 100);
+				jon.frames = Paths.getSparrowAtlas('stages/JON');
+				jon.animation.addByPrefix('idle', 'JON', 24, true);
+				jon.antialiasing = ClientPrefs.globalAntialiasing;
+				add(jon);
 
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {
@@ -4193,6 +4208,11 @@ class PlayState extends MusicBeatState
 			case 'school':
 				if(!ClientPrefs.lowQuality) {
 					bgGirls.dance();
+				}
+
+			case 'horror':
+				if (curBeat % 2 == 0) {
+					jon.animation.play('idle');
 				}
 
 			case 'mall':
