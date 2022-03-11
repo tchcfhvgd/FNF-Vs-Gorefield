@@ -1,0 +1,49 @@
+{
+	"songs": [
+		[
+			"Curious Cat",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Metamorphosis",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Hi Jon",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "SCP-3166",
+	"weekName": "Vs Gorefield",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}
