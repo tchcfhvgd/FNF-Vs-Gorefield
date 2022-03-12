@@ -217,7 +217,8 @@ class PlayState extends MusicBeatState
 
 	//Sprites Gorefield
 	var bgHorror:BGSprite;
-	var jon:FlxSprite;
+	var jon:BGSprite;
+	var blackBord:FlxSprite;
 
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
@@ -427,15 +428,22 @@ class PlayState extends MusicBeatState
 				}
 			
 			case 'horror': //Week Gorefield
-				bgHorror = new BGSprite('stages/BG', -300, -620);
+				bgHorror = new BGSprite('stages/BG', -600, -620);
 				bgHorror.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bgHorror);
 
-				jon = new FlxSprite(450, 100);
-				jon.frames = Paths.getSparrowAtlas('stages/JON');
-				jon.animation.addByPrefix('idle', 'JON', 24, true);
+				jon = new BGSprite('stages/JON', 450, 100, ['JON']);
 				jon.antialiasing = ClientPrefs.globalAntialiasing;
+				jon.updateHitbox();
 				add(jon);
+
+				blackBord = new FlxSprite(0, 0).loadGraphic(Paths.image('stages/balls_overlay'));
+				blackBord.antialiasing = ClientPrefs.globalAntialiasing;
+				blackBord.cameras = [camOther];
+				blackBord.alpha = 0;
+				add(blackBord);
+
+				//Minecraft Lunar Client :)
 
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {
@@ -1550,6 +1558,10 @@ class PlayState extends MusicBeatState
 	
 					bottomBoppers.dance(true);
 					santa.dance(true);
+				}
+
+				if(curStage == 'horror') {
+					jon.dance(true);
 				}
 
 				switch (swagCounter)
@@ -4125,6 +4137,32 @@ class PlayState extends MusicBeatState
 			resyncVocals();
 		}
 
+		if (curSong == 'Curious Cat' && curStep >= 393 && curStep <= 511)
+		{
+			dad.playAnim('see', false);
+		}
+
+		if (curSong == "Curious Cat")
+		{
+			switch (curStep)
+			{
+				case 393:
+					FlxTween.tween(blackBord, {alpha: 1}, 15);
+					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 15, {ease: FlxEase.quadInOut});
+					new FlxTimer().start(15 , function(tmr:FlxTimer)
+					{
+						defaultCamZoom = 1.5;
+					});
+				case 512:
+					FlxTween.tween(blackBord, {alpha: 0}, 1);
+					FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut});
+					new FlxTimer().start(1 , function(tmr:FlxTimer)
+					{
+						defaultCamZoom = 0.75;
+					});
+			}
+		}
+
 		if(curStep == lastStepHit) {
 			return;
 		}
@@ -4211,9 +4249,7 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'horror':
-				if (curBeat % 2 == 0) {
-					jon.animation.play('idle');
-				}
+				jon.dance(true);
 
 			case 'mall':
 				if(!ClientPrefs.lowQuality) {
