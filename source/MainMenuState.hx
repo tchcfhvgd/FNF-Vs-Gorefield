@@ -333,10 +333,16 @@ class MainMenuState extends MusicBeatState
 							{
 								var daChoice:String = optionShit[curSelected];
 
+								var diffic = CoolUtil.getDifficultyFilePath(1);
+								if(diffic == null) diffic = '';
+
 								switch (daChoice)
 								{
 									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
+
+									MusicBeatState.switchState(new StoryMenuState());
+
+									FreeplayState.destroyFreeplayVocals();
 								}
 							});
 						}

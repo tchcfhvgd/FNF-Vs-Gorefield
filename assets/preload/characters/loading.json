@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				18,
+				18
+			],
+			"anim": "enter",
+			"fps": 24,
+			"name": "ENTER",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": true,
+			"name": "pizza"
+		},
+		{
+			"offsets": [
+				18,
+				18
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "enterloop",
+			"loop": true,
+			"name": "ENTER0024"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "pizza",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [
+		161,
+		161,
+		161
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 0.6
+}

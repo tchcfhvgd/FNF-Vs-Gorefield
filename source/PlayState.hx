@@ -215,11 +215,6 @@ class PlayState extends MusicBeatState
 	var santa:BGSprite;
 	var heyTimer:Float;
 
-	//Sprites Gorefield
-	var bgHorror:BGSprite;
-	var jon:BGSprite;
-	var blackBord:FlxSprite;
-
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 	var bgGhouls:BGSprite;
@@ -271,9 +266,15 @@ class PlayState extends MusicBeatState
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
 
+	//Sprites Gorefield
+	var bgHorror:BGSprite;
+	var jon:BGSprite;
+	var blackBord:FlxSprite;
+
+	var tweens:Array<FlxTween> = [];
+
 	override public function create()
 	{
-		Paths.clearStoredMemory();
 
 		// for lua
 		instance = this;
@@ -1986,6 +1987,10 @@ class PlayState extends MusicBeatState
 				}
 			}
 
+			for (tween in tweens) {
+				tween.active = false;
+			}
+
 			for (tween in modchartTweens) {
 				tween.active = false;
 			}
@@ -2025,6 +2030,10 @@ class PlayState extends MusicBeatState
 				if(chars[i].colorTween != null) {
 					chars[i].colorTween.active = true;
 				}
+			}
+
+			for (tween in tweens) {
+				tween.active = true;
 			}
 			
 			for (tween in modchartTweens) {
@@ -3210,22 +3219,41 @@ class PlayState extends MusicBeatState
 					}
 
 					FlxTransitionableState.skipNextTransIn = true;
-					FlxTransitionableState.skipNextTransOut = true;
+					//FlxTransitionableState.skipNextTransOut = true;
 
 					prevCamFollow = camFollow;
 					prevCamFollowPos = camFollowPos;
 
-					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0] + difficulty, PlayState.storyPlaylist[0]);
 					FlxG.sound.music.stop();
 
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
-							LoadingState.loadAndSwitchState(new PlayState());
+							new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+								cancelMusicFadeTween();
+								MusicBeatState.switchState(new LoadingScreen(
+									storyPlaylist[0].toLowerCase(),
+									storyDifficulty, 
+									Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
+									true,
+									storyPlaylist
+								)
+							);
+							});
 						});
 					} else {
 						cancelMusicFadeTween();
-						LoadingState.loadAndSwitchState(new PlayState());
+						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+							cancelMusicFadeTween();
+							MusicBeatState.switchState(new LoadingScreen(
+								storyPlaylist[0].toLowerCase(),
+								storyDifficulty, 
+								Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
+								true,
+								storyPlaylist
+							)
+							);
+						});
 					}
 				}
 			}
@@ -4147,19 +4175,13 @@ class PlayState extends MusicBeatState
 			switch (curStep)
 			{
 				case 393:
-					FlxTween.tween(blackBord, {alpha: 1}, 15);
-					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 15, {ease: FlxEase.quadInOut});
-					new FlxTimer().start(15 , function(tmr:FlxTimer)
-					{
-						defaultCamZoom = 1.5;
-					});
+					dad.stunned = true;
+					tweens.push(FlxTween.tween(blackBord, {alpha: 1}, 15));
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1.5}, 15, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.5;}}));
 				case 512:
-					FlxTween.tween(blackBord, {alpha: 0}, 1);
-					FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut});
-					new FlxTimer().start(1 , function(tmr:FlxTimer)
-					{
-						defaultCamZoom = 0.75;
-					});
+					dad.stunned = false;
+					tweens.push(FlxTween.tween(blackBord, {alpha: 0}, 1));
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
 			}
 		}
 
