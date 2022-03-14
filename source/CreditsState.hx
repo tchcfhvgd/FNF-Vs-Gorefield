@@ -86,13 +86,13 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Vs Gorefield Team'],
-			['Jloor',		'jloor',		'Director/Main Programmer of Gorefield',						'https://twitter.com/GamerJloor',	'ffece5'],
+			['Jloor',		'jloor',		'Director/Programmer of Gorefield',						'https://twitter.com/GamerJloor',	'ffece5'],
 			['Zero Artist',			'zero',		'Director/Main Artist/Animator of Gorefield',					'https://twitter.com/zero_artist02',		'936cbc'],
 			['AlexR',				'alexr',			'Main Muscian of Gorefield',				'https://www.youtube.com/channel/UC5tEcYoKNMgEZCbo8N_OQDg',			'a46458'],
 			['NexusMoon',				'nexusmoon',			'Additional Muscian of Gorefield',				'https://www.youtube.com/channel/UCzPbLNyU2_FbbpjLnX0IBSQ',			'a696f0'],
-			['Lunarcleint',				'jloor',			'Main Programmer of Gorefield',				'https://twitter.com/yoshubs',			'279ADC'],
-			['BitfoxOriginal',				'jloor',			'Additional Muscian of Gorefield',				'https://twitter.com/yoshubs',			'279ADC'],
-			['Tok',				'jloor',			'Main Charter of Gorefield',				'https://twitter.com/yoshubs',			'279ADC'],
+			['Lunarcleint',				'lunarcleint',			'Main Programmer of Gorefield',				'https://www.youtube.com/channel/UCQatY-8MINs--sTr2Z_FgyQ',			'ea9769'],
+			['BitfoxOriginal',				'bitfox',			'Additional Muscian of Gorefield',				'https://twitter.com/BitfoxOriginal',			'ffcc97'],
+			['Tok',				'tok',			'Main Charter of Gorefield',				'https://www.youtube.com/channel/UCxVPeCN7P4lZX32tJKIBIWQ/featured',			'7e789c'],
 			[''],
 			['Special Thanks'],
 			['Lumpy Touch',			'lumpy',			"The Creator of Garfield Gameboy'd (Animation)",						'https://twitter.com/LumpyTouch',			'340952'],

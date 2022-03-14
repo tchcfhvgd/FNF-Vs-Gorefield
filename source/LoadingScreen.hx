@@ -158,7 +158,7 @@ class LoadingScreen extends MusicBeatState {
                     "garfield" => LoadingScreen.PreloadType.atlas,
                     "bf-art" => LoadingScreen.PreloadType.atlas,
                 ];
-            case 'metamorphosis' | 'hi-jon':
+            case 'metamorphosis':
                 [
                     "stages/BG" => LoadingScreen.PreloadType.image,
                     "stages/balls_overlay" => LoadingScreen.PreloadType.image,
@@ -177,6 +177,29 @@ class LoadingScreen extends MusicBeatState {
                     "CLAWNOTE_assets" => LoadingScreen.PreloadType.image,
                     "gorefield-phase-2" => LoadingScreen.PreloadType.atlas,
                     "bf-art" => LoadingScreen.PreloadType.atlas,
+                ];
+            case 'hi-jon':
+                [
+                    "stages/BG" => LoadingScreen.PreloadType.image,
+                    "stages/BG_2" => LoadingScreen.PreloadType.image,
+                    "stages/balls_overlay" => LoadingScreen.PreloadType.image,
+                    "stages/JON" => LoadingScreen.PreloadType.image,
+                    "NOTE_assets" => LoadingScreen.PreloadType.image,
+                    "noteSplashes" => LoadingScreen.PreloadType.image,
+                    "ready" => LoadingScreen.PreloadType.image,
+                    "go" => LoadingScreen.PreloadType.image,
+                    "set" => LoadingScreen.PreloadType.image,
+                    "shit" => LoadingScreen.PreloadType.image,
+                    "bad" => LoadingScreen.PreloadType.image,
+                    "good" => LoadingScreen.PreloadType.image,
+                    "sick" => LoadingScreen.PreloadType.image,
+                    "combo" => LoadingScreen.PreloadType.image,
+                    "CATNOTE_assets" => LoadingScreen.PreloadType.image,
+                    "CLAWNOTE_assets" => LoadingScreen.PreloadType.image,
+                    "gorefield-phase-2" => LoadingScreen.PreloadType.atlas,
+                    "bf-art" => LoadingScreen.PreloadType.atlas,
+                    "gorefield-phase-3" => LoadingScreen.PreloadType.atlas,
+                    "bf-final" => LoadingScreen.PreloadType.atlas,
                 ];
         };
     }
