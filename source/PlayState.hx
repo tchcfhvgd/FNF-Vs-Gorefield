@@ -2101,7 +2101,7 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
-		if (healthBar.percent >= 20) {
+		if (healthBar.percent <= 20) {
 			playerOneState = "losing";
 			playerTwoState = "default";
 		} else {
@@ -2840,6 +2840,13 @@ class PlayState extends MusicBeatState
 			camFollow.x += dad.cameraPosition[0];
 			camFollow.y += dad.cameraPosition[1];
 			tweenCamIn();
+
+			switch (curStage)
+			{
+				case 'horror':
+					camFollow.x = dad.getMidpoint().x - -200;
+					camFollow.y = dad.getMidpoint().y - 100;
+			}
 		}
 		else
 		{
@@ -2847,11 +2854,7 @@ class PlayState extends MusicBeatState
 
 			switch (curStage)
 			{
-				case 'limo':
-					camFollow.x = boyfriend.getMidpoint().x - 300;
-				case 'mall':
-					camFollow.y = boyfriend.getMidpoint().y - 200;
-				case 'school' | 'schoolEvil':
+				case 'horror':
 					camFollow.x = boyfriend.getMidpoint().x - 200;
 					camFollow.y = boyfriend.getMidpoint().y - 200;
 			}
@@ -3991,6 +3994,8 @@ class PlayState extends MusicBeatState
 					dad.stunned = false;
 					tweens.push(FlxTween.tween(blackBord, {alpha: 0}, 1));
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 768:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.5}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.5;}}));
 			}
 		}
 
@@ -4004,10 +4009,9 @@ class PlayState extends MusicBeatState
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1;}}));
 				case 1148:
 					FlxG.sound.play(Paths.sound('Explosion_Jon'));
-					FlxG.camera.flash(FlxColor.WHITE, 6);
+					camOther.flash(FlxColor.WHITE, 6);
 				case 1149:
 					jon.visible = false;
-				case 1152:
 					bgFinal.visible = true;
 					bgHorror.visible = false;
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.5;}}));
