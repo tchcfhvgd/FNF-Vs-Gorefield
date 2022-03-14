@@ -1088,6 +1088,49 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
+	public function startVideoEnd(name:String):Void {
+		#if VIDEOS_ALLOWED
+		var foundFile:Bool = false;
+		var fileName:String = #if MODS_ALLOWED Paths.modFolders('videos/' + name + '.' + Paths.VIDEO_EXT); #else ''; #end
+		#if sys
+		if(FileSystem.exists(fileName)) {
+			foundFile = true;
+		}
+		#end
+
+		if(!foundFile) {
+			fileName = Paths.video(name);
+			#if sys
+			if(FileSystem.exists(fileName)) {
+			#else
+			if(OpenFlAssets.exists(fileName)) {
+			#end
+				foundFile = true;
+			}
+		}
+
+		if(foundFile) {
+			inCutscene = true;
+			var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+			bg.scrollFactor.set();
+			bg.cameras = [camHUD];
+			add(bg);
+
+			(new FlxVideo(fileName)).finishCallback = function() {
+				remove(bg);
+				endSong();
+			}
+			return;
+		}
+		else
+		{
+			FlxG.log.warn('Couldnt find video file: ' + fileName);
+			endSong();
+		}
+		#end
+		endSong();
+	}
+
 	public function startVideo(name:String):Void {
 		#if VIDEOS_ALLOWED
 		var foundFile:Bool = false;
@@ -2888,9 +2931,36 @@ class PlayState extends MusicBeatState
 		camFollowPos.setPosition(x, y);
 	}
 
+	function videoTransformation():Void
+	{
+		startVideoEnd("transformationCinematic");
+	}
+
+	function theEnd():Void
+	{
+		startVideoEnd("theEnd");
+	}
+
 	function finishSong():Void
 	{
 		var finishCallback:Void->Void = endSong; //In case you want to change it in a specific song.
+
+		if (isStoryMode)
+		{
+			switch (SONG.song)
+			{
+				case 'Curiuos Cat':
+					{
+						finishCallback = videoTransformation;
+					}
+				case 'Hi Jon':
+					{
+						finishCallback = theEnd;
+					}
+				default:
+					{endSong();}
+			}
+		}
 
 		updateTime = false;
 		FlxG.sound.music.volume = 0;
@@ -3657,7 +3727,14 @@ class PlayState extends MusicBeatState
 						}
 					case 'Ps Note':
 						ps.playAnim(Std.string(psCounter) + ' remove');
+						health -= 0.6;
 						FlxG.sound.play(Paths.sound("Ay_mi_Prepucio_digo_Vida", "shared"));
+						if (psCounter > 0)
+							psCounter--; 
+						if (psCounter == 0) health = 0;
+					case 'Scream Note':
+						ps.playAnim(Std.string(psCounter) + ' remove');
+						screamBoooo();
 						if (psCounter > 0)
 							psCounter--; 
 						if (psCounter == 0) health = 0;
@@ -4005,6 +4082,8 @@ class PlayState extends MusicBeatState
 			switch (curStep)
 			{
 				case 1132:
+					jon.x = 3;
+					jon.y = 3;
 					jon.animation.play("boom", false);
 				case 1140:
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1;}}));
@@ -4352,6 +4431,21 @@ class PlayState extends MusicBeatState
 		return null;
 	}
 	#end
+
+	function screamBoooo() {
+		var scream:FlxSprite = new FlxSprite(0, 0);
+		scream.frames = Paths.getSparrowAtlas('SCREAMER');
+		scream.animation.addByPrefix('boo', "SCREAMER", 24, false);
+		scream.animation.play('boo', false);
+		scream.antialiasing = ClientPrefs.globalAntialiasing;
+		scream.updateHitbox();
+		scream.cameras = [camOther];
+		add(scream);
+
+		FlxG.sound.play(Paths.sound("screamSound", "shared"));
+
+		FlxG.camera.shake(0.1, 2.8);
+	}
 
 	var curLight:Int = 0;
 	var curLightEvent:Int = 0;

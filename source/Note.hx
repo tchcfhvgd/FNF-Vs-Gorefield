@@ -111,8 +111,16 @@ class Note extends FlxSprite
 				case 'GF Sing':
 					gfNote = true;
 				case 'Ps Note':
-					ignoreNote = !mustPress;
-					//reloadNote('NOTE'); //make sure its default note texture
+					ignoreNote = mustPress;
+					reloadNote('CLAW');
+					hitCausesMiss = true;
+
+					colorSwap.hue = 0;
+					colorSwap.saturation = 0;
+					colorSwap.brightness = 0;
+				case 'Scream Note':
+					ignoreNote = mustPress;
+					reloadNote('CAT');
 					hitCausesMiss = true;
 
 					colorSwap.hue = 0;
