@@ -1,81 +1,81 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "idle",
-			"loop": false,
-			"name": "Garfield idle"
+			"fps": 24,
+			"name": "Garfield idle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				35,
 				4
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singLEFT",
-			"loop": false,
-			"name": "Garfield L"
+			"fps": 24,
+			"name": "Garfield L",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-4,
 				-10
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singDOWN",
-			"loop": false,
-			"name": "Garfield D"
+			"fps": 24,
+			"name": "Garfield D",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				10,
 				0
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singUP",
-			"loop": false,
-			"name": "Garfield U"
+			"fps": 24,
+			"name": "Garfield U",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-22,
 				4
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singRIGHT",
-			"loop": false,
-			"name": "Garfield R"
+			"fps": 24,
+			"name": "Garfield R",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-2,
 				5
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "trans",
-			"loop": false,
-			"name": "transicion"
+			"fps": 24,
+			"name": "transicion",
+			"indices": []
 		},
 		{
+			"loop": true,
 			"offsets": [
 				-36,
 				-15
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "see",
-			"loop": true,
-			"name": "te veo"
+			"fps": 24,
+			"name": "te veo",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -84,12 +84,12 @@
 		0,
 		0
 	],
-	"healthicon": "face",
+	"healthicon": "garfield",
 	"flip_x": false,
 	"healthbar_colors": [
-		161,
-		161,
-		161
+		212,
+		77,
+		41
 	],
 	"camera_position": [
 		-120,

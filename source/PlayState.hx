@@ -185,6 +185,10 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
+	//Icons Animated
+	private var playerOneState:String = "default";
+	private var playerTwoState:String = "default";
+
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
 
@@ -438,8 +442,9 @@ class PlayState extends MusicBeatState
 				bgHorror.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bgHorror);
 
-				bgFinal = new BGSprite('stages/BG_2', -300, -200);
+				bgFinal = new BGSprite('stages/BG_2', -400, 100);
 				bgFinal.antialiasing = ClientPrefs.globalAntialiasing;
+				bgFinal.scale.set(1.1, 1.1);
 				bgFinal.visible = false;
 				add(bgFinal);
 
@@ -2069,6 +2074,25 @@ class PlayState extends MusicBeatState
 		iconP2.scale.set(mult, mult);
 		iconP2.updateHitbox();
 
+		if (curBeat % 2 == 0)
+		{
+			switch (playerOneState)
+			{
+				case 'default':
+					iconP1.animation.play('default');
+				case 'losing':
+					iconP1.animation.play('losing');
+			}
+
+			switch (playerTwoState)
+			{
+				case 'default':
+					iconP2.animation.play('default');
+				case 'losing':
+					iconP2.animation.play('losing');
+			}
+		}
+
 		var iconOffset:Int = 26;
 
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
@@ -2077,15 +2101,26 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
-		else
-			iconP1.animation.curAnim.curFrame = 0;
+		if (healthBar.percent >= 20) {
+			playerOneState = "losing";
+			playerTwoState = "default";
+		} else {
+			playerOneState = "default";
+			playerTwoState = "default";
+		}
 
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
-		else
-			iconP2.animation.curAnim.curFrame = 0;
+		if (healthBar.percent == 50) {
+			playerOneState = "default";
+			playerTwoState = "default";
+		}
+
+		if (healthBar.percent >= 80) {
+			playerOneState = "default";
+			playerTwoState = "losing";
+		} else {
+			playerOneState = "default";
+			playerTwoState = "default";
+		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;
@@ -3963,18 +3998,19 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStep)
 			{
-				case 1135:
+				case 1132:
 					jon.animation.play("boom", false);
-					jon.animation.finishCallback = function(boom:String)
-					{
-						jon.visible = false;
-					}
-				case 1150:
+				case 1140:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1;}}));
+				case 1148:
 					FlxG.sound.play(Paths.sound('Explosion_Jon'));
+					FlxG.camera.flash(FlxColor.WHITE, 6);
+				case 1149:
+					jon.visible = false;
 				case 1152:
 					bgFinal.visible = true;
 					bgHorror.visible = false;
-					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.3;}}));
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.5;}}));
 			}
 		}
 
