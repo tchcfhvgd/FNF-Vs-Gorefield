@@ -1117,17 +1117,23 @@ class PlayState extends MusicBeatState
 
 			(new FlxVideo(fileName)).finishCallback = function() {
 				remove(bg);
-				endSong();
+				MusicBeatState.switchState(new CreditsState());
+				FlxG.sound.music.stop();
+				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0.7);
 			}
 			return;
 		}
 		else
 		{
 			FlxG.log.warn('Couldnt find video file: ' + fileName);
-			endSong();
+			MusicBeatState.switchState(new CreditsState());
+			FlxG.sound.music.stop();
+			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0.7);
 		}
 		#end
-		endSong();
+		MusicBeatState.switchState(new CreditsState());
+		FlxG.sound.music.stop();
+		FlxG.sound.playMusic(Paths.music('freakyMenu'), 0.7);
 	}
 
 	public function startVideo(name:String):Void {
@@ -4083,8 +4089,11 @@ class PlayState extends MusicBeatState
 			switch (curStep)
 			{
 				case 1132:
+<<<<<<< HEAD
 					jon.x = 620;
 					jon.y = 70;
+=======
+>>>>>>> 57b385a8e3a70545c5066faaf3bd7ac59f268628
 					jon.animation.play("boom", false);
 				case 1140:
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1;}}));
