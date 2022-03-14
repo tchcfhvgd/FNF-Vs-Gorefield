@@ -39,6 +39,7 @@ class LoadingScreen extends MusicBeatState {
         "curious cat" => ["loadingbg1", "rightloadingimage1", [561.46,-42.08], "BF 1"],
         "metamorphosis" => ["loadingbg2", "GOREFIELD_CARGA", [600.46,-42.08], "GOREFIELD"],
         "hi-jon" => ["pantalla_azul_3", "JHON_CARGA", [770.46,40.08], "JHON CARGA"],
+        "hi jon" => ["pantalla_azul_3", "JHON_CARGA", [770.46,40.08], "JHON CARGA"],
     ];
 
     private var finished:Bool = false;
