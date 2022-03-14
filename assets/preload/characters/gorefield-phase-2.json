@@ -1,65 +1,65 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "Gorefield idle"
+			"fps": 24,
+			"name": "Gorefield idle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				129,
 				4
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "Gorefield L"
+			"fps": 24,
+			"name": "Gorefield L",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-6,
 				-127
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "Gorefield D"
+			"fps": 24,
+			"name": "Gorefield D",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				6,
 				69
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "Gorefield Up"
+			"fps": 24,
+			"name": "Gorefield Up",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				160,
 				-40
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Gorefield R"
+			"fps": 24,
+			"name": "Gorefield R",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/GOREFIELD_PHASE_2",
 	"position": [
-		-640,
+		-520,
 		-400
 	],
 	"healthicon": "gorefield-phase-2",
@@ -70,8 +70,8 @@
 		41
 	],
 	"camera_position": [
-		-110,
-		20
+		-70,
+		90
 	],
 	"sing_duration": 6.1,
 	"scale": 1
