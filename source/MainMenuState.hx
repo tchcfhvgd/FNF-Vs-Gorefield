@@ -114,7 +114,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxTween.tween(logoBl, {y: logoBl.y + 5}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 
-		gorefield = new FlxSprite(589, 40);
+		gorefield = new FlxSprite(590, 40);
 		gorefield.frames = Paths.getSparrowAtlas('GorefieldMENU');
 		gorefield.antialiasing = true;
 		gorefield.animation.addByPrefix('idle', 'MenuIdle', 24);

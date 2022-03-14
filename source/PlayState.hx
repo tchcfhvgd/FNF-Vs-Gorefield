@@ -452,7 +452,6 @@ class PlayState extends MusicBeatState
 				jon.frames = Paths.getSparrowAtlas('stages/JON');
 				jon.animation.addByPrefix('idle', 'JON', 24, true);
 				jon.animation.addByPrefix('boom', 'BOMB JON', 24, false);
-				jon.animation.play("idle");
 				jon.antialiasing = ClientPrefs.globalAntialiasing;
 				jon.updateHitbox();
 				add(jon);
@@ -1314,6 +1313,8 @@ class PlayState extends MusicBeatState
 				{
 					gf.dance();
 				}
+				if (curStep < 1132 && curSong == "Hi Jon")
+					jon.animation.play("idle", true);
 				if (tmr.loopsLeft % boyfriend.danceEveryNumBeats == 0 && boyfriend.animation.curAnim != null && !boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.stunned)
 				{
 					boyfriend.dance();
@@ -4011,6 +4012,22 @@ class PlayState extends MusicBeatState
 				case 1148:
 					FlxG.sound.play(Paths.sound('Explosion_Jon'));
 					camOther.flash(FlxColor.WHITE, 6);
+
+					for (note in unspawnNotes) {
+						note.reloadNote("","NOTEBW_assets");
+						note.texture = "NOTEBW_assets";
+						note.noteSplashTexture = "noteSplashesBW";
+					}
+					notes.forEachAlive(function(note:Note) {
+						note.reloadNote("","NOTEBW_assets");
+						note.noteSplashTexture = "noteSplashesBW";
+						note.texture = "NOTEBW_assets";
+					});
+					strumLineNotes.forEachAlive(function(note:StrumNote) {
+						note.texture = "NOTEBW_assets";
+						note.reloadNote();
+					});
+
 				case 1149:
 					jon.visible = false;
 					bgFinal.visible = true;
@@ -4088,6 +4105,8 @@ class PlayState extends MusicBeatState
 		{
 			gf.dance();
 		}
+		if (curStep < 1132 && curSong == "Hi Jon")
+			jon.animation.play("idle", true);
 		if (curBeat % boyfriend.danceEveryNumBeats == 0 && boyfriend.animation.curAnim != null && !boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.stunned)
 		{
 			boyfriend.dance();

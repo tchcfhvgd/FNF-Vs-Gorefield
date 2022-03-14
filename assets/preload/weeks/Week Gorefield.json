@@ -2,29 +2,29 @@
 	"songs": [
 		[
 			"Curious Cat",
-			"dad",
+			"garfield",
 			[
-				146,
-				113,
-				253
+				212,
+				77,
+				41
 			]
 		],
 		[
 			"Metamorphosis",
-			"dad",
+			"garfield",
 			[
-				146,
-				113,
-				253
+				212,
+				77,
+				41
 			]
 		],
 		[
 			"Hi Jon",
-			"dad",
+			"gorefield-phase-3",
 			[
-				146,
-				113,
-				253
+				227,
+				227,
+				227
 			]
 		]
 	],
@@ -39,9 +39,9 @@
 	"storyName": "SCP-3166",
 	"weekName": "Vs Gorefield",
 	"freeplayColor": [
-		146,
-		113,
-		253
+		212,
+		77,
+		41
 	],
 	"hideStoryMode": false,
 	"weekBefore": "tutorial",
