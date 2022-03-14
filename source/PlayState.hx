@@ -444,7 +444,7 @@ class PlayState extends MusicBeatState
 
 				bgFinal = new BGSprite('stages/BG_2', -400, 100);
 				bgFinal.antialiasing = ClientPrefs.globalAntialiasing;
-				bgFinal.scale.set(1.1, 1.1);
+				bgFinal.scale.set(1.3, 1.3);
 				bgFinal.visible = false;
 				add(bgFinal);
 
@@ -4083,8 +4083,8 @@ class PlayState extends MusicBeatState
 			switch (curStep)
 			{
 				case 1132:
-					jon.x = 3;
-					jon.y = 3;
+					jon.x = 620;
+					jon.y = 70;
 					jon.animation.play("boom", false);
 				case 1140:
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1;}}));

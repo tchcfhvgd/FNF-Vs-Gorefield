@@ -1,66 +1,66 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				72,
 				20
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "PHASE 3 L"
+			"fps": 24,
+			"name": "PHASE 3 L",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "PHASE 3 IDLE"
+			"fps": 24,
+			"name": "PHASE 3 IDLE",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-4,
 				-54
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "PHASE 3 DOWN"
+			"fps": 24,
+			"name": "PHASE 3 DOWN",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-130,
 				10
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "PHASE 3 R"
+			"fps": 24,
+			"name": "PHASE 3 R",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				150
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "PHASE 3 Up"
+			"fps": 24,
+			"name": "PHASE 3 Up",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/GOREFIELD_PHASE_3",
 	"position": [
-		-210,
-		30
+		-170,
+		-50
 	],
 	"healthicon": "gorefield-phase-3",
 	"flip_x": false,
@@ -71,7 +71,7 @@
 	],
 	"camera_position": [
 		70,
-		-20
+		80
 	],
 	"sing_duration": 6.1,
 	"scale": 1
