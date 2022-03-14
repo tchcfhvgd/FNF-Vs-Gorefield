@@ -110,6 +110,14 @@ class Note extends FlxSprite
 					noAnimation = true;
 				case 'GF Sing':
 					gfNote = true;
+				case 'Ps Note':
+					ignoreNote = !mustPress;
+					//reloadNote('NOTE'); //make sure its default note texture
+					hitCausesMiss = true;
+
+					colorSwap.hue = 0;
+					colorSwap.saturation = 0;
+					colorSwap.brightness = 0;
 			}
 			noteType = value;
 		}
