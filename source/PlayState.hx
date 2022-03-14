@@ -272,6 +272,10 @@ class PlayState extends MusicBeatState
 	var blackBord:FlxSprite;
 	var bgFinal:BGSprite;
 
+	//Mechanics
+	private var ps:Character = null;
+	private var psCounter:Int = 4;
+
 	var tweens:Array<FlxTween> = [];
 
 	override public function create()
@@ -805,6 +809,14 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 78;
 		}
+
+		ps = new Character(0,0,"ps");
+		ps.cameras = [camHUD];
+		ps.playAnim('4');
+		ps.screenCenter();
+		ps.x += (ps.width * 2) + 10;
+		ps.y += ps.height * 3 + 43;
+		add(ps);
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -1871,10 +1883,6 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		/*if (FlxG.keys.justPressed.NINE)
-		{
-			iconP1.swapOldIcon();
-		}*/
 
 		callOnLuas('onUpdate', [elapsed]);
 
@@ -3609,6 +3617,11 @@ class PlayState extends MusicBeatState
 							boyfriend.playAnim('hurt', true);
 							boyfriend.specialAnim = true;
 						}
+					case 'Ps Note':
+						ps.playAnim(Std.string(psCounter) + ' remove');
+						if (psCounter > 0)
+							psCounter--;
+						if (psCounter == 0) health = 0;
 				}
 				
 				note.wasGoodHit = true;
