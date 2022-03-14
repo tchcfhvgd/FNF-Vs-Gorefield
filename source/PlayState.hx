@@ -1313,7 +1313,7 @@ class PlayState extends MusicBeatState
 				{
 					gf.dance();
 				}
-				if (curStep < 1132 && curSong == "Hi Jon")
+				if (jon.animation.name != "boom")
 					jon.animation.play("idle", true);
 				if (tmr.loopsLeft % boyfriend.danceEveryNumBeats == 0 && boyfriend.animation.curAnim != null && !boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.stunned)
 				{
@@ -4105,7 +4105,7 @@ class PlayState extends MusicBeatState
 		{
 			gf.dance();
 		}
-		if (curStep < 1132 && curSong == "Hi Jon")
+		if (jon.animation.name != "boom")
 			jon.animation.play("idle", true);
 		if (curBeat % boyfriend.danceEveryNumBeats == 0 && boyfriend.animation.curAnim != null && !boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.stunned)
 		{
