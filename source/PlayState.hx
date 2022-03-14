@@ -268,7 +268,7 @@ class PlayState extends MusicBeatState
 
 	//Sprites Gorefield
 	var bgHorror:BGSprite;
-	var jon:BGSprite;
+	var jon:FlxSprite;
 	var blackBord:FlxSprite;
 	var bgFinal:BGSprite;
 
@@ -430,16 +430,20 @@ class PlayState extends MusicBeatState
 				}
 			
 			case 'horror': //Week Gorefield
-				bgHorror = new BGSprite('stages/BG', -900, -620);
+				bgHorror = new BGSprite('stages/BG', -800, -620);
 				bgHorror.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bgHorror);
 
-				bgFinal = new BGSprite('stages/BG_2', -600, -620);
+				bgFinal = new BGSprite('stages/BG_2', -300, -200);
 				bgFinal.antialiasing = ClientPrefs.globalAntialiasing;
 				bgFinal.visible = false;
 				add(bgFinal);
 
-				jon = new BGSprite('stages/JON', 450, 100, ['JON']);
+				jon = new FlxSprite(660, 70);
+				jon.frames = Paths.getSparrowAtlas('stages/JON');
+				jon.animation.addByPrefix('idle', 'JON', 24, true);
+				jon.animation.addByPrefix('boom', 'BOMB JON', 24, false);
+				jon.animation.play("idle");
 				jon.antialiasing = ClientPrefs.globalAntialiasing;
 				jon.updateHitbox();
 				add(jon);
@@ -1320,10 +1324,6 @@ class PlayState extends MusicBeatState
 	
 					bottomBoppers.dance(true);
 					santa.dance(true);
-				}
-
-				if(curStage == 'horror') {
-					jon.dance(true);
 				}
 
 				switch (swagCounter)
@@ -3950,6 +3950,14 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStep)
 			{
+				case 1135:
+					jon.animation.play("boom", false);
+					jon.animation.finishCallback = function(boom:String)
+					{
+						jon.visible = false;
+					}
+				case 1150:
+					FlxG.sound.play(Paths.sound('Explosion_Jon'));
 				case 1152:
 					bgFinal.visible = true;
 					bgHorror.visible = false;
@@ -4041,9 +4049,6 @@ class PlayState extends MusicBeatState
 				if(!ClientPrefs.lowQuality) {
 					bgGirls.dance();
 				}
-
-			case 'horror':
-				jon.dance(true);
 
 			case 'mall':
 				if(!ClientPrefs.lowQuality) {
