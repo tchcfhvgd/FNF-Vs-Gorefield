@@ -34,30 +34,37 @@ class LoadingScreen extends MusicBeatState {
         "isStoryMode" => false
     ];
 
+    private var spriteInfo:Map<String, Array<Dynamic>> = [
+        "curious-cat" => ["loadingbg1", "rightloadingimage1", [561.46,-42.08], "BF 1"],
+        "metamorphosis" => ["loadingbg2", "GOREFIELD_CARGA", [600.46,-42.08], "GOREFIELD"],
+        "hi-jon" => ["pantalla_azul_3", "JHON_CARGA", [770.46,40.08], "JHON CARGA"],
+    ];
+
     private var finished:Bool = false;
 
     override public function create() {
+        trace(playstateInfo["songLowerCase"]);
+
         super.create();
 
         FlxG.sound.music.stop();
 
         Paths.setCurrentLevel('shared');
 
-        var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("loadingbg", "shared"));
+        var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image(spriteInfo[playstateInfo["songLowerCase"]][0], "shared"));
         bg.screenCenter();
         bg.antialiasing = true;
         add(bg);
 
         var portrait:FlxSprite = new FlxSprite();
-        portrait.frames = Paths.getSparrowAtlas("rightloadingimage", "shared");
-        portrait.animation.addByPrefix('idle', 'BF 1', 24, true);
+        portrait.frames = Paths.getSparrowAtlas(spriteInfo[playstateInfo["songLowerCase"]][1], "shared");
+        portrait.animation.addByPrefix('idle', spriteInfo[playstateInfo["songLowerCase"]][3], 24, true);
         portrait.animation.play('idle');
         portrait.scale.set(0.68,0.68);
         portrait.updateHitbox();
-        portrait.screenCenter();
-        portrait.x += portrait.width/2.5;
-        portrait.y += 10;
+        portrait.setPosition(spriteInfo[playstateInfo["songLowerCase"]][2][0], spriteInfo[playstateInfo["songLowerCase"]][2][1]);
         portrait.antialiasing = true;
+        trace(portrait);
         add(portrait);
 
         pizza = new Character(0,0,"loading");

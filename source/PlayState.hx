@@ -815,7 +815,7 @@ class PlayState extends MusicBeatState
 		ps.playAnim('4');
 		ps.screenCenter();
 		ps.x += (ps.width * 2) + 10;
-		ps.y += ps.height * 3 + 43;
+		ps.y += ps.height * 3 + 42;
 		add(ps);
 
 		strumLineNotes.cameras = [camHUD];
