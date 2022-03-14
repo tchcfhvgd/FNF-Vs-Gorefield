@@ -3657,8 +3657,9 @@ class PlayState extends MusicBeatState
 						}
 					case 'Ps Note':
 						ps.playAnim(Std.string(psCounter) + ' remove');
+						FlxG.sound.play(Paths.sound("Ay_mi_Prepucio_digo_Vida", "shared"));
 						if (psCounter > 0)
-							psCounter--;
+							psCounter--; 
 						if (psCounter == 0) health = 0;
 				}
 				
