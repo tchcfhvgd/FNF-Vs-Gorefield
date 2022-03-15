@@ -275,12 +275,14 @@ class PlayState extends MusicBeatState
 	var jon:FlxSprite;
 	var blackBord:FlxSprite;
 	var bgFinal:BGSprite;
+	var whiteFuck:FlxSprite;
 
 	//Mechanics
 	private var ps:Character = null;
 	private var psCounter:Int = 4;
 
 	var tweens:Array<FlxTween> = [];
+	var char:String = '';
 
 	override public function create()
 	{
@@ -357,7 +359,7 @@ class PlayState extends MusicBeatState
 		detailsPausedText = "Paused - " + detailsText;
 		#end
 
-		GameOverSubstate.resetVariables();
+		GameOverSubstate.resetVariables(char);
 		var songName:String = Paths.formatToSongPath(SONG.song);
 
 		curStage = PlayState.SONG.stage;
@@ -447,6 +449,12 @@ class PlayState extends MusicBeatState
 				bgFinal.scale.set(1.3, 1.3);
 				bgFinal.visible = false;
 				add(bgFinal);
+
+				whiteFuck = new FlxSprite().makeGraphic(1280, 720, FlxColor.WHITE);
+				whiteFuck.cameras = [camOther];
+				whiteFuck.alpha = 0;
+				whiteFuck.screenCenter(X);
+				add(whiteFuck);	
 
 				jon = new FlxSprite(660, 70);
 				jon.frames = Paths.getSparrowAtlas('stages/JON');
@@ -2151,7 +2159,7 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
-		if (healthBar.percent <= 20) {
+		if (healthBar.percent >= 20) {
 			playerOneState = "losing";
 			playerTwoState = "default";
 		} else {
@@ -2474,7 +2482,7 @@ class PlayState extends MusicBeatState
 				for (timer in modchartTimers) {
 					timer.active = true;
 				}
-				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
+				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y, char));
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				
@@ -4089,17 +4097,15 @@ class PlayState extends MusicBeatState
 			switch (curStep)
 			{
 				case 1132:
-<<<<<<< HEAD
 					jon.x = 620;
 					jon.y = 70;
-=======
->>>>>>> 57b385a8e3a70545c5066faaf3bd7ac59f268628
 					jon.animation.play("boom", false);
 				case 1140:
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1;}}));
 				case 1148:
 					FlxG.sound.play(Paths.sound('Explosion_Jon'));
 					camOther.flash(FlxColor.WHITE, 6);
+					FlxTween.tween(whiteFuck, {alpha: 1}, 0.5);
 
 					for (note in unspawnNotes) {
 						note.reloadNote("","NOTEBW_assets");
@@ -4121,6 +4127,8 @@ class PlayState extends MusicBeatState
 					bgFinal.visible = true;
 					bgHorror.visible = false;
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.5;}}));
+				case 1165:
+					FlxTween.tween(whiteFuck, {alpha: 0}, 0.5);
 			}
 		}
 

@@ -86,8 +86,8 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Vs Gorefield Team'],
-			['Jloor',		'jloor',		'Director/Programmer of Gorefield',						'https://twitter.com/GamerJloor',	'ffece5'],
-			['Zero Artist',			'zero',		'Director/Main Artist/Animator of Gorefield',					'https://twitter.com/zero_artist02',		'936cbc'],
+			['Jloor',		'jloor',		'Director/Main Programmer of Gorefield',						'https://twitter.com/GamerJloor',	'ffece5'],
+			['Zero Artist',			'zero',		'Co-Director/Main Artist/Animator of Gorefield',					'https://twitter.com/zero_artist02',		'936cbc'],
 			['AlexR',				'alexr',			'Main Muscian of Gorefield',				'https://www.youtube.com/channel/UC5tEcYoKNMgEZCbo8N_OQDg',			'a46458'],
 			['NexusMoon',				'nexusmoon',			'Additional Muscian of Gorefield',				'https://www.youtube.com/channel/UCzPbLNyU2_FbbpjLnX0IBSQ',			'a696f0'],
 			['Lunarcleint',				'lunarcleint',			'Main Programmer of Gorefield',				'https://www.youtube.com/channel/UCQatY-8MINs--sTr2Z_FgyQ',			'ea9769'],

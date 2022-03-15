@@ -59,8 +59,8 @@
 	"no_antialiasing": false,
 	"image": "characters/GOREFIELD_PHASE_3",
 	"position": [
-		-170,
-		-50
+		-130,
+		-40
 	],
 	"healthicon": "gorefield-phase-3",
 	"flip_x": false,

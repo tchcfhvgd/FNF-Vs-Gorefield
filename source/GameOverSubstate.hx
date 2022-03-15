@@ -24,13 +24,23 @@ class GameOverSubstate extends MusicBeatSubstate
 	public static var loopSoundName:String = 'gameOver';
 	public static var endSoundName:String = 'gameOverEnd';
 
+	private var char:String = '';
+
 	public static var instance:GameOverSubstate;
 
-	public static function resetVariables() {
-		characterName = 'bf';
-		deathSoundName = 'fnf_loss_sfx';
-		loopSoundName = 'gameOver';
-		endSoundName = 'gameOverEnd';
+	public static function resetVariables(char:String) {
+		switch (char) {
+			case 'bf-final':
+				characterName = 'bf-final';
+				deathSoundName = 'fnf_loss_sfx_final';
+				loopSoundName = 'gameOver';
+				endSoundName = 'gameOverEnd';
+			default:
+				characterName = 'bf';
+				deathSoundName = 'fnf_loss_sfx';
+				loopSoundName = 'gameOver';
+				endSoundName = 'gameOverEnd';
+		}
 	}
 
 	override function create()
@@ -41,7 +51,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		super.create();
 	}
 
-	public function new(x:Float, y:Float, camX:Float, camY:Float)
+	public function new(x:Float, y:Float, camX:Float, camY:Float, char:String)
 	{
 		super();
 
