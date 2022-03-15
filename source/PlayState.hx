@@ -274,6 +274,7 @@ class PlayState extends MusicBeatState
 	var bgHorror:BGSprite;
 	var jon:FlxSprite;
 	var blackBord:FlxSprite;
+	var redBord:FlxSprite;
 	var bgFinal:BGSprite;
 	var whiteFuck:FlxSprite;
 	var blackFuck:FlxSprite;
@@ -451,7 +452,21 @@ class PlayState extends MusicBeatState
 				bgFinal.antialiasing = ClientPrefs.globalAntialiasing;
 				bgFinal.scale.set(1.3, 1.3);
 				bgFinal.visible = false;
-				add(bgFinal);
+				add(bgFinal);	
+
+				jon = new FlxSprite(660, 70);
+				jon.frames = Paths.getSparrowAtlas('stages/JON');
+				jon.animation.addByPrefix('idle', 'JON', 24, true);
+				jon.animation.addByPrefix('boom', 'BOMB JON', 24, false);
+				jon.antialiasing = ClientPrefs.globalAntialiasing;
+				jon.updateHitbox();
+				add(jon);
+
+				redBord = new FlxSprite(0, 0).loadGraphic(Paths.image('stages/redvignette'));
+				redBord.antialiasing = ClientPrefs.globalAntialiasing;
+				redBord.cameras = [camOther];
+				redBord.alpha = 0;
+				add(redBord);
 
 				whiteFuck = new FlxSprite().makeGraphic(1280, 720, FlxColor.WHITE);
 				whiteFuck.cameras = [camOther];
@@ -463,15 +478,7 @@ class PlayState extends MusicBeatState
 				blackFuck.cameras = [camOther];
 				blackFuck.alpha = 0;
 				blackFuck.screenCenter(X);
-				add(blackFuck);	
-
-				jon = new FlxSprite(660, 70);
-				jon.frames = Paths.getSparrowAtlas('stages/JON');
-				jon.animation.addByPrefix('idle', 'JON', 24, true);
-				jon.animation.addByPrefix('boom', 'BOMB JON', 24, false);
-				jon.antialiasing = ClientPrefs.globalAntialiasing;
-				jon.updateHitbox();
-				add(jon);
+				add(blackFuck);
 
 				blackBord = new FlxSprite(0, 0).loadGraphic(Paths.image('stages/balls_overlay'));
 				blackBord.antialiasing = ClientPrefs.globalAntialiasing;
@@ -4110,12 +4117,44 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStep)
 			{
+				case 912:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.9}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.9;}}));
+				case 928:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 944:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.9}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.9;}}));
+				case 960:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 928:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.9}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.9;}}));
+				case 992:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 1008:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.9}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.9;}}));
+				case 1024:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+					new FlxTimer().start(1, function(tmrr:FlxTimer)
+					{
+						FlxTween.tween(redBord, {alpha: 1}, 1, {type: PINGPONG});
+					});
+				case 1040:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 1056:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.9}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.9;}}));
+				case 1072:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 1088:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.9}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.9;}}));
+				case 1104:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 1120:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.9}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.9;}}));
 				case 1132:
 					jon.x = 620;
 					jon.y = 70;
 					jon.animation.play("boom", false);
 				case 1140:
-					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1;}}));
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1.2}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.2;}}));
 				case 1148:
 					FlxG.sound.play(Paths.sound('Explosion_Jon'));
 					camOther.flash(FlxColor.WHITE, 6);
@@ -4141,6 +4180,7 @@ class PlayState extends MusicBeatState
 					});
 
 				case 1149:
+					tweens.push(FlxTween.tween(redBord, {alpha: 0}, 1));
 					jon.visible = false;
 					bgFinal.visible = true;
 					bgHorror.visible = false;
