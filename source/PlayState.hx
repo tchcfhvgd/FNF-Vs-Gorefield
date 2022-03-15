@@ -276,6 +276,7 @@ class PlayState extends MusicBeatState
 	var blackBord:FlxSprite;
 	var bgFinal:BGSprite;
 	var whiteFuck:FlxSprite;
+	var blackFuck:FlxSprite;
 
 	//Mechanics
 	private var ps:Character = null;
@@ -455,6 +456,12 @@ class PlayState extends MusicBeatState
 				whiteFuck.alpha = 0;
 				whiteFuck.screenCenter(X);
 				add(whiteFuck);	
+
+				blackFuck = new FlxSprite().makeGraphic(1280, 720, FlxColor.BLACK);
+				blackFuck.cameras = [camOther];
+				blackFuck.alpha = 0;
+				blackFuck.screenCenter(X);
+				add(blackFuck);	
 
 				jon = new FlxSprite(660, 70);
 				jon.frames = Paths.getSparrowAtlas('stages/JON');
@@ -4129,6 +4136,8 @@ class PlayState extends MusicBeatState
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.5;}}));
 				case 1165:
 					FlxTween.tween(whiteFuck, {alpha: 0}, 0.5);
+				case 1690:
+					FlxTween.tween(blackFuck, {alpha: 1}, 2.5);
 			}
 		}
 
