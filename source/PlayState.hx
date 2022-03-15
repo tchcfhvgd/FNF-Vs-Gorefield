@@ -4137,6 +4137,8 @@ class PlayState extends MusicBeatState
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
 				case 768:
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.55}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.55;}}));
+				case 1036:
+					FlxTween.tween(blackFuck, {alpha: 1}, 4);
 			}
 		}
 
@@ -4144,11 +4146,23 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStep)
 			{
+				case 320:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.65}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.65;}}));
+				case 384:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
 				case 400:
 					tweens.push(FlxTween.tween(blackBord, {alpha: 1}, 6));
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 1.5}, 6, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.5;}}));	
 				case 448:
 					tweens.push(FlxTween.tween(blackBord, {alpha: 0}, 1));
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 576:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.65}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.65;}}));
+				case 832:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
+				case 1072:
+					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.65}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.65;}}));
+				case 1097:
 					tweens.push(FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 0.75;}}));
 			}
 		}
@@ -4158,7 +4172,6 @@ class PlayState extends MusicBeatState
 			switch (curStep)
 			{
 				case 1024:
-	
 					new FlxTimer().start(0.5, function(tmrr:FlxTimer)
 					{
 						FlxTween.tween(redBord, {alpha: 1}, 0.5, {type: PINGPONG});
