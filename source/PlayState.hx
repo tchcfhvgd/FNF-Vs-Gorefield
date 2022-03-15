@@ -281,6 +281,8 @@ class PlayState extends MusicBeatState
 	private var ps:Character = null;
 	private var psCounter:Int = 4;
 
+	var scream:FlxSprite = null;
+
 	var tweens:Array<FlxTween> = [];
 	var char:String = '';
 
@@ -829,6 +831,15 @@ class PlayState extends MusicBeatState
 		ps.x += (ps.width * 2) + 10;
 		ps.y += ps.height * 3 + 42;
 		add(ps);
+
+		scream = new FlxSprite(0, 0);
+		scream.frames = Paths.getSparrowAtlas('SCREAMER');
+		scream.animation.addByPrefix('boo', "SCREAMER", 24, false);
+		scream.antialiasing = ClientPrefs.globalAntialiasing;
+		scream.updateHitbox();
+		scream.cameras = [camHUD];
+		scream.visible = false;
+		add(scream);
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -2794,6 +2805,7 @@ class PlayState extends MusicBeatState
 							boyfriend = boyfriendMap.get(value2);
 							boyfriend.alpha = lastAlpha;
 							iconP1.changeIcon(boyfriend.healthIcon);
+							GameOverSubstate.characterName = boyfriend.curCharacter;
 						}
 						setOnLuas('boyfriendName', boyfriend.curCharacter);
 
@@ -4108,14 +4120,18 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(whiteFuck, {alpha: 1}, 0.5);
 
 					for (note in unspawnNotes) {
-						note.reloadNote("","NOTEBW_assets");
-						note.texture = "NOTEBW_assets";
-						note.noteSplashTexture = "noteSplashesBW";
+						if (note.noteType == "") {
+							note.reloadNote("","NOTEBW_assets");
+							note.texture = "NOTEBW_assets";
+							note.noteSplashTexture = "noteSplashesBW";
+						}
 					}
 					notes.forEachAlive(function(note:Note) {
-						note.reloadNote("","NOTEBW_assets");
-						note.noteSplashTexture = "noteSplashesBW";
-						note.texture = "NOTEBW_assets";
+						if (note.noteType == "") {
+							note.reloadNote("","NOTEBW_assets");
+							note.texture = "NOTEBW_assets";
+							note.noteSplashTexture = "noteSplashesBW";
+						}
 					});
 					strumLineNotes.forEachAlive(function(note:StrumNote) {
 						note.texture = "NOTEBW_assets";
@@ -4469,18 +4485,19 @@ class PlayState extends MusicBeatState
 	#end
 
 	function screamBoooo() {
-		var scream:FlxSprite = new FlxSprite(0, 0);
-		scream.frames = Paths.getSparrowAtlas('SCREAMER');
-		scream.animation.addByPrefix('boo', "SCREAMER", 24, false);
-		scream.animation.play('boo', false);
-		scream.antialiasing = ClientPrefs.globalAntialiasing;
-		scream.updateHitbox();
-		scream.cameras = [camOther];
-		add(scream);
+		scream.visible = true;
+
+		scream.animation.play('boo', true);
+
+		scream.animation.finishCallback = function (name:String) {
+			if (name == "boo")
+				scream.visible = false;
+		};
 
 		FlxG.sound.play(Paths.sound("screamSound", "shared"));
 
-		FlxG.camera.shake(0.1, 2.8);
+		camHUD.shake(0.01, 3);
+		camGame.shake(0.04, 3);
 	}
 
 	var curLight:Int = 0;

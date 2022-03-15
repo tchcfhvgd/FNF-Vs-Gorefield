@@ -44,6 +44,8 @@ class LoadingScreen extends MusicBeatState {
 
     private var finished:Bool = false;
 
+    private var keypressed:Bool = false;
+
     override public function create() {
         trace(playstateInfo["songLowerCase"]);
 
@@ -117,8 +119,9 @@ class LoadingScreen extends MusicBeatState {
     override function update(elapsed:Float) {
         super.update(elapsed);
 
-        if (FlxG.keys.justPressed.ENTER && finished) {
+        if (FlxG.keys.justPressed.ENTER && finished && !keypressed) {
             finish();
+            keypressed = true;
         }
     }
 
@@ -165,6 +168,7 @@ class LoadingScreen extends MusicBeatState {
                     "CATNOTE_assets" => LoadingScreen.PreloadType.image,
                     "CLAWNOTE_assets" => LoadingScreen.PreloadType.image,
                     "garfield" => LoadingScreen.PreloadType.atlas,
+                    "SCREAMER" => LoadingScreen.PreloadType.image,
                     "bf-art" => LoadingScreen.PreloadType.atlas,
                 ];
             case 'metamorphosis':
@@ -185,6 +189,7 @@ class LoadingScreen extends MusicBeatState {
                     "CATNOTE_assets" => LoadingScreen.PreloadType.image,
                     "CLAWNOTE_assets" => LoadingScreen.PreloadType.image,
                     "gorefield-phase-2" => LoadingScreen.PreloadType.atlas,
+                    "SCREAMER" => LoadingScreen.PreloadType.image,
                     "bf-art" => LoadingScreen.PreloadType.atlas,
                 ];
             case 'hi-jon':
@@ -207,6 +212,7 @@ class LoadingScreen extends MusicBeatState {
                     "CLAWNOTE_assets" => LoadingScreen.PreloadType.image,
                     "NOTEBW_assets" => LoadingScreen.PreloadType.image,
                     "noteSplashesBW" => LoadingScreen.PreloadType.image,
+                    "SCREAMER" => LoadingScreen.PreloadType.image,
                     "gorefield-phase-2" => LoadingScreen.PreloadType.atlas,
                     "bf-art" => LoadingScreen.PreloadType.atlas,
                     "gorefield-phase-3" => LoadingScreen.PreloadType.atlas,

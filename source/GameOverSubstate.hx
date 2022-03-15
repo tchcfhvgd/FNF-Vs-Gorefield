@@ -66,6 +66,10 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		camFollow = new FlxPoint(boyfriend.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
 
+		if (characterName == "bf-final") {
+			camFollow.y = boyfriend.getGraphicMidpoint().y - 160;
+		}
+
 		FlxG.sound.play(Paths.sound(deathSoundName));
 		Conductor.changeBPM(100);
 		// FlxG.camera.followLerp = 1;
@@ -88,10 +92,9 @@ class GameOverSubstate extends MusicBeatSubstate
 		super.update(elapsed);
 
 		PlayState.instance.callOnLuas('onUpdate', [elapsed]);
-		if(updateCamera) {
-			var lerpVal:Float = CoolUtil.boundTo(elapsed * 0.6, 0, 1);
-			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
-		}
+		FlxG.camera.follow(camFollowPos, LOCKON, 1);
+		updateCamera = true;
+		camFollowPos.setPosition(camFollow.x, camFollow.y);
 
 		if (controls.ACCEPT)
 		{
