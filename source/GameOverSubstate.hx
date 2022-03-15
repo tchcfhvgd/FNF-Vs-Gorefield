@@ -67,6 +67,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		camFollow = new FlxPoint(boyfriend.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
 
 		if (characterName == "bf-final") {
+			deathSoundName = 'fnf_loss_sfx_final';
 			camFollow.y = boyfriend.getGraphicMidpoint().y - 160;
 		}
 
