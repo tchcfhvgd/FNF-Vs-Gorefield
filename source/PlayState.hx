@@ -841,6 +841,7 @@ class PlayState extends MusicBeatState
 
 		scream = new FlxSprite(0, 0);
 		scream.frames = Paths.getSparrowAtlas('SCREAMER');
+		scream.scale.set(1.15, 1.15);
 		scream.animation.addByPrefix('boo', "SCREAMER", 24, false);
 		scream.antialiasing = ClientPrefs.globalAntialiasing;
 		scream.updateHitbox();
@@ -957,6 +958,9 @@ class PlayState extends MusicBeatState
 				case 'senpai' | 'roses' | 'thorns':
 					if(daSong == 'roses') FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
+				
+				case 'metamorphosis':
+					startVideo("transformationCinematic");
 
 				default:
 					startCountdown();
@@ -2965,11 +2969,6 @@ class PlayState extends MusicBeatState
 		camFollowPos.setPosition(x, y);
 	}
 
-	function videoTransformation():Void
-	{
-		startVideoEnd("transformationCinematic");
-	}
-
 	function theEnd():Void
 	{
 		startVideoEnd("theEnd");
@@ -2983,10 +2982,6 @@ class PlayState extends MusicBeatState
 		{
 			switch (SONG.song)
 			{
-				case 'Curiuos Cat':
-					{
-						finishCallback = videoTransformation;
-					}
 				case 'Hi Jon':
 					{
 						finishCallback = theEnd;

@@ -96,6 +96,7 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Special Thanks'],
 			['Lumpy Touch',			'lumpy',			"The Creator of Garfield Gameboy'd (Animation)",						'https://twitter.com/LumpyTouch',			'340952'],
+			['Miaux',			'miaux',			"Player Test",						'',			'633a4a'],
 			['Jloor Community',		'community',		'Discord Server!',					'https://discord.gg/VseWbHCgRJ',			'ffffff']
 		];
 		

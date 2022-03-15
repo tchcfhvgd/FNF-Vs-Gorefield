@@ -301,7 +301,7 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('pressStorymode'));
 					gorefield.animation.play('jeje');
-					gorefield.offset.y = 45;
+					gorefield.offset.y = 55;
 					gorefield.offset.x = -25;
 					gorefield.x = 250;
 					FlxG.sound.music.stop();
