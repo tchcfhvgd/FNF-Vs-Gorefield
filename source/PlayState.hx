@@ -444,17 +444,17 @@ class PlayState extends MusicBeatState
 				}
 			
 			case 'horror': //Week Gorefield
-				bgHorror = new BGSprite('stages/BG', -800, -620);
+				var bgHorror:BGSprite = new BGSprite('stages/BG', -800, -620);
 				bgHorror.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bgHorror);
 
-				bgFinal = new BGSprite('stages/BG_2', -400, 100);
+				var bgFinal:BGSprite = new BGSprite('stages/BG_2', -400, 100);
 				bgFinal.antialiasing = ClientPrefs.globalAntialiasing;
 				bgFinal.scale.set(1.3, 1.3);
 				bgFinal.visible = false;
 				add(bgFinal);	
 
-				jon = new FlxSprite(660, 70);
+				var jon:FlxSprite = new FlxSprite(660, 70);
 				jon.frames = Paths.getSparrowAtlas('stages/JON');
 				jon.animation.addByPrefix('idle', 'JON', 24, true);
 				jon.animation.addByPrefix('boom', 'BOMB JON', 24, false);
@@ -462,25 +462,25 @@ class PlayState extends MusicBeatState
 				jon.updateHitbox();
 				add(jon);
 
-				redBord = new FlxSprite(0, 0).loadGraphic(Paths.image('stages/redvignette'));
+				var redBord =:FlxSprite new FlxSprite(0, 0).loadGraphic(Paths.image('stages/redvignette'));
 				redBord.antialiasing = ClientPrefs.globalAntialiasing;
 				redBord.cameras = [camOther];
 				redBord.alpha = 0;
 				add(redBord);
 
-				whiteFuck = new FlxSprite().makeGraphic(1280, 720, FlxColor.WHITE);
+				var whiteFuck:FlxSprite = new FlxSprite().makeGraphic(1280, 720, FlxColor.WHITE);
 				whiteFuck.cameras = [camOther];
 				whiteFuck.alpha = 0;
 				whiteFuck.screenCenter(X);
 				add(whiteFuck);	
 
-				blackFuck = new FlxSprite().makeGraphic(1280, 720, FlxColor.BLACK);
+				var blackFuck:FlxSprite = new FlxSprite().makeGraphic(1280, 720, FlxColor.BLACK);
 				blackFuck.cameras = [camOther];
 				blackFuck.alpha = 0;
 				blackFuck.screenCenter(X);
 				add(blackFuck);
 
-				blackBord = new FlxSprite(0, 0).loadGraphic(Paths.image('stages/balls_overlay'));
+				var blackBord:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('stages/balls_overlay'));
 				blackBord.antialiasing = ClientPrefs.globalAntialiasing;
 				blackBord.cameras = [camOther];
 				blackBord.alpha = 0;
