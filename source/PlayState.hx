@@ -462,7 +462,7 @@ class PlayState extends MusicBeatState
 				jon.updateHitbox();
 				add(jon);
 
-				var redBord =:FlxSprite new FlxSprite(0, 0).loadGraphic(Paths.image('stages/redvignette'));
+				var redBord:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('stages/redvignette'));
 				redBord.antialiasing = ClientPrefs.globalAntialiasing;
 				redBord.cameras = [camOther];
 				redBord.alpha = 0;
