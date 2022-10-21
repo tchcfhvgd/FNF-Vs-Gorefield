@@ -24,6 +24,7 @@ import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
 import flixel.ui.FlxButton;
+import animateatlas.AtlasFrameMaker;
 import flixel.ui.FlxSpriteButton;
 import openfl.net.FileReference;
 import openfl.events.Event;
