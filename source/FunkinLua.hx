@@ -18,6 +18,7 @@ import flixel.system.FlxSound;
 import flixel.util.FlxTimer;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
+import animateatlas.AtlasFrameMaker;
 import flixel.util.FlxColor;
 import flixel.FlxBasic;
 import flixel.FlxObject;
