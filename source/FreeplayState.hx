@@ -319,7 +319,7 @@ class FreeplayState extends MusicBeatState
 
 		if(ctrl)
 		{
-			if android
+			#if android
 			removeVirtualPad();
 			#end
                         persistentUpdate = false;
