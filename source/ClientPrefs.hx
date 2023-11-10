@@ -27,7 +27,7 @@ class ClientPrefs {
 	public static var scoreZoom:Bool = true;
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
-	public static var controllerMode:Bool = false;
+	public static var controllerMode:Bool = #if android true #else false #end;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -52,6 +52,8 @@ class ClientPrefs {
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public static var ratingOffset:Int = 0;
 	public static var sickWindow:Int = 45;
+	public static var hitboxalpha:Float = 0.2;
+	public static var hitboxmode:String = 'Classic';
 	public static var goodWindow:Int = 90;
 	public static var badWindow:Int = 135;
 	public static var safeFrames:Float = 10;
@@ -122,6 +124,9 @@ class ClientPrefs {
 		FlxG.save.data.gameplaySettings = gameplaySettings;
 		FlxG.save.data.controllerMode = controllerMode;
 	
+		FlxG.save.data.hitboxmode = hitboxmode;
+		FlxG.save.data.hitboxalpha = hitboxalpha;
+		
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
@@ -202,7 +207,12 @@ class ClientPrefs {
 		if(FlxG.save.data.comboOffset != null) {
 			comboOffset = FlxG.save.data.comboOffset;
 		}
-		
+		if(FlxG.save.data.hitboxmode != null) {
+			hitboxmode = FlxG.save.data.hitboxmode;
+		}
+		if(FlxG.save.data.hitboxalpha != null) {
+			hitboxalpha = FlxG.save.data.hitboxalpha;
+		}
 		if(FlxG.save.data.ratingOffset != null) {
 			ratingOffset = FlxG.save.data.ratingOffset;
 		}
