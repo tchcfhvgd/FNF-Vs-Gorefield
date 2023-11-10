@@ -3027,7 +3027,7 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		endingSong = true;
 		camZooming = false;
-		inCutscene = true;
+		inCutscene = false;
 		updateTime = false;
 
 		deathCounter = 0;
@@ -3130,6 +3130,8 @@ class PlayState extends MusicBeatState
 					cancelMusicFadeTween();
 
 				}
+			}
+		}
 	#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementObject = null;
 	function startAchievement(achieve:String) {
