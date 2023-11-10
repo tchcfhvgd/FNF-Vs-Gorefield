@@ -3027,7 +3027,7 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		endingSong = true;
 		camZooming = false;
-		inCutscene = false;
+		inCutscene = true;
 		updateTime = false;
 
 		deathCounter = 0;
