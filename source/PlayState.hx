@@ -1140,47 +1140,31 @@ class PlayState extends MusicBeatState
 
 	public function startVideoEnd(name:String):Void {
 		#if VIDEOS_ALLOWED
-		var foundFile:Bool = false;
-		var fileName:String = #if MODS_ALLOWED Paths.modFolders('videos/' + name + '.' + Paths.VIDEO_EXT); #else ''; #end
+		inCutscene = true;
+
+		var filepath:String = Paths.video(name);
 		#if sys
-		if(FileSystem.exists(fileName)) {
-			foundFile = true;
-		}
+		if(!FileSystem.exists(filepath))
+		#else
+		if(!OpenFlAssets.exists(filepath))
 		#end
-
-		if(!foundFile) {
-			fileName = Paths.video(name);
-			#if sys
-			if(FileSystem.exists(fileName)) {
-			#else
-			if(OpenFlAssets.exists(fileName)) {
-			#end
-				foundFile = true;
-			}
-		}
-
-		if(foundFile) {
-			inCutscene = true;
-			var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-			bg.scrollFactor.set();
-			bg.cameras = [camHUD];
-			add(bg);
-
-			(new FlxVideo(fileName)).finishCallback = function() {
-				remove(bg);
-				MusicBeatState.switchState(new CreditsState());
-				FlxG.sound.music.stop();
-				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0.7);
-			}
+		{
+			FlxG.log.warn('Couldnt find video file: ' + name);
+			startAndEnd();
 			return;
 		}
-		else
+
+		var video:MP4Handler = new MP4Handler();
+		video.playVideo(filepath);
+		video.finishCallback = function()
 		{
-			FlxG.log.warn('Couldnt find video file: ' + fileName);
-			MusicBeatState.switchState(new CreditsState());
-			FlxG.sound.music.stop();
-			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0.7);
+			startAndEnd();
+			return;
 		}
+		#else
+		FlxG.log.warn('Platform not supported!');
+		startAndEnd();
+		return;
 		#end
 		MusicBeatState.switchState(new CreditsState());
 		FlxG.sound.music.stop();
@@ -3144,80 +3128,6 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.stop();
 
 					cancelMusicFadeTween();
-					if (curSong == "Curious Cat") {
-							#if VIDEOS_ALLOWED
-							var foundFile:Bool = false;
-							var fileName:String = #if MODS_ALLOWED Paths.modFolders('videos/' + "transformationCinematic" + '.' + Paths.VIDEO_EXT); #else ''; #end
-							#if sys
-							if(FileSystem.exists(fileName)) {
-								foundFile = true;
-							}
-							#end
-					
-							if(!foundFile) {
-								fileName = Paths.video("transformationCinematic");
-								#if sys
-								if(FileSystem.exists(fileName)) {
-								#else
-								if(OpenFlAssets.exists(fileName)) {
-								#end
-									foundFile = true;
-								}
-							}
-					
-							if(foundFile) {
-								inCutscene = true;
-								var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-								bg.scrollFactor.set();
-								bg.cameras = [camHUD];
-								add(bg);
-					
-									(new FlxVideo(fileName)).finishCallback = function() {
-										MusicBeatState.switchState(new LoadingScreen(
-												storyPlaylist[0].toLowerCase(),
-												storyDifficulty, 
-												Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
-												true,
-												storyPlaylist
-											)
-										);
-									};
-							}
-							else
-							{
-								FlxG.log.warn('Couldnt find video file: ' + fileName);
-							}
-							#end
-						} else {
-							new FlxTimer().start(1.5, function(tmr:FlxTimer) {
-							cancelMusicFadeTween();
-							MusicBeatState.switchState(new LoadingScreen(
-									storyPlaylist[0].toLowerCase(),
-									storyDifficulty, 
-									Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
-									true,
-									storyPlaylist
-									)
-								);
-							});
-						}
-						
-					}
-			}
-			else
-			{
-				trace('WENT BACK TO FREEPLAY??');
-				cancelMusicFadeTween();
-				if(FlxTransitionableState.skipNextTransIn) {
-					CustomFadeTransition.nextCamera = null;
-				}
-				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				changedDifficulty = false;
-			}
-			transitioning = true;
-		}
-	}
 
 	#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementObject = null;
