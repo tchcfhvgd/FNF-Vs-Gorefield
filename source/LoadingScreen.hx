@@ -47,6 +47,7 @@ class LoadingScreen extends MusicBeatState {
     private var keypressed:Bool = false;
 
     override public function create() {
+        Paths.clearUnusedMemory();
         trace(playstateInfo["songLowerCase"]);
 
         super.create();
