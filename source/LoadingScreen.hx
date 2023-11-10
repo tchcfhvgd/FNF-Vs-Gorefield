@@ -47,7 +47,7 @@ class LoadingScreen extends MusicBeatState {
     private var keypressed:Bool = false;
 
     override public function create() {
-        Paths.clearUnusedMemory();
+        Paths.clearStoredMemory();
         trace(playstateInfo["songLowerCase"]);
 
         super.create();
@@ -120,7 +120,18 @@ class LoadingScreen extends MusicBeatState {
     override function update(elapsed:Float) {
         super.update(elapsed);
 
-        if (FlxG.keys.justPressed.ENTER && finished && !keypressed) {
+        #if android
+        var justTouched:Bool = false;
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				justTouched = true;
+			}
+		}
+		#end
+        
+        if (FlxG.keys.justPressed.ENTER #if android || justTouched #end && finished && !keypressed) {
             finish();
             keypressed = true;
         }
