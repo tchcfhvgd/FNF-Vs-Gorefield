@@ -3129,6 +3129,7 @@ class PlayState extends MusicBeatState
 
 					cancelMusicFadeTween();
 
+				}
 	#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementObject = null;
 	function startAchievement(achieve:String) {
