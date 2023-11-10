@@ -3132,6 +3132,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
+	}
 	#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementObject = null;
 	function startAchievement(achieve:String) {
