@@ -3128,7 +3128,8 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.stop();
 
 					cancelMusicFadeTween();
-							new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+							if(winterHorrorlandNext) {
+					                new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
 							MusicBeatState.switchState(new LoadingScreen(
 									storyPlaylist[0].toLowerCase(),
@@ -3156,6 +3157,8 @@ class PlayState extends MusicBeatState
 			}
 			transitioning = true;
 		}
+	}
+		
 	#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementObject = null;
 	function startAchievement(achieve:String) {
