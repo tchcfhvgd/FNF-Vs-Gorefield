@@ -3126,21 +3126,25 @@ class PlayState extends MusicBeatState
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
-							LoadingState.loadAndSwitchState(new LoadingScreen());
+							LoadingState.loadAndSwitchState(new LoadingScreen(
 						        storyPlaylist[0].toLowerCase(),
 							storyDifficulty, 
 							Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
 							true,
 							storyPlaylist
+							)
+							);
 							});
 					} else {
 						cancelMusicFadeTween();
-				                LoadingState.loadAndSwitchState(new LoadingScreen());
+				                LoadingState.loadAndSwitchState(new LoadingScreen(
 					        storyPlaylist[0].toLowerCase(),
 						storyDifficulty, 
 						Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
 						true,
 					        storyPlaylist
+					        )
+						);
 					}
 				}
 			}
