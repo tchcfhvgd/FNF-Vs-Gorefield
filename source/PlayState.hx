@@ -2953,7 +2953,42 @@ class PlayState extends MusicBeatState
 		camFollowPos.setPosition(x, y);
 	}
 
-	function theEnd():Void
+	function theEnd1():Void
+	{
+		startVideoEnd("transformationCinematic");
+	}
+
+	function finishSong1():Void
+	{
+		var finishCallback2:Void->Void = endSong; //In case you want to change it in a specific song.
+
+		if (isStoryMode)
+		{
+			switch (SONG.song)
+			{
+				case 'curious-cat':
+					{
+						finishCallback2 = theEnd1;
+					}
+				default:
+					{endSong();}
+			}
+		}
+
+		updateTime = false;
+		FlxG.sound.music.volume = 0;
+		vocals.volume = 0;
+		vocals.pause();
+		if(ClientPrefs.noteOffset <= 0) {
+			finishCallback2();
+		} else {
+			finishTimer = new FlxTimer().start(ClientPrefs.noteOffset / 1000, function(tmr:FlxTimer) {
+				finishCallback2();
+			});
+		}
+			}
+        
+        function theEnd():Void
 	{
 		startVideoEnd("theEnd");
 	}
