@@ -120,6 +120,7 @@ class PlayState extends MusicBeatState
 	public var songSpeedType:String = "multiplicative";
 	public var noteKillOffset:Float = 350;
 	
+	public var playbackRate(default, set):Float = 1;
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
@@ -3057,6 +3058,7 @@ class PlayState extends MusicBeatState
 				#end
 			}
 
+			playbackRate = 1;
 			if (chartingMode)
 			{
 				openChartEditor();
