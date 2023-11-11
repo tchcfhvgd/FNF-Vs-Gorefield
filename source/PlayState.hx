@@ -3046,7 +3046,11 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		#if LUA_ALLOWED
 		var ret:Dynamic = callOnLuas('onEndSong', []);
+		#else
+		var ret:Dynamic = FunkinLua.Function_Continue;
+		#end
 		if(ret != FunkinLua.Function_Stop && !transitioning) {
 			if (SONG.validScore)
 			{
@@ -3072,7 +3076,6 @@ class PlayState extends MusicBeatState
 
 				if (storyPlaylist.length <= 0)
 				{
-					WeekData.loadTheFirstEnabledMod();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 					cancelMusicFadeTween();
@@ -3115,14 +3118,12 @@ class PlayState extends MusicBeatState
 					}
 
 					FlxTransitionableState.skipNextTransIn = true;
-					//FlxTransitionableState.skipNextTransOut = true;
 
 					prevCamFollow = camFollow;
 					prevCamFollowPos = camFollowPos;
-
-					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0] + difficulty, PlayState.storyPlaylist[0]);
 					FlxG.sound.music.stop();
 
+	cancelMusicFadeTween();				
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
@@ -3136,8 +3137,9 @@ class PlayState extends MusicBeatState
 							);
 							});
 					} else {
-						cancelMusicFadeTween();
-				                LoadingState.loadAndSwitchState(new LoadingScreen(
+						
+     new FlxTimer().start(1.5, function(tmr:FlxTimer) {					cancelMusicFadeTween();
+				                MusicBeatState.switchState(new LoadingScreen(
 					        storyPlaylist[0].toLowerCase(),
 						storyDifficulty, 
 						Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
@@ -3145,6 +3147,7 @@ class PlayState extends MusicBeatState
 					        storyPlaylist
 					        )
 						);
+					});
 					}
 				}
 			}
