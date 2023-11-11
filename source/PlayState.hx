@@ -3128,11 +3128,34 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.stop();
 
 					cancelMusicFadeTween();
+							new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+							cancelMusicFadeTween();
+							MusicBeatState.switchState(new LoadingScreen(
+									storyPlaylist[0].toLowerCase(),
+									storyDifficulty, 
+									Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
+									true,
+									storyPlaylist
+									)
+								);
+							});
+						}
 
-				}
+					}
 			}
+			else
+			{
+				trace('WENT BACK TO FREEPLAY??');
+				cancelMusicFadeTween();
+				if(FlxTransitionableState.skipNextTransIn) {
+					CustomFadeTransition.nextCamera = null;
+				}
+				MusicBeatState.switchState(new FreeplayState());
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				changedDifficulty = false;
+			}
+			transitioning = true;
 		}
-	}
 	#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementObject = null;
 	function startAchievement(achieve:String) {
