@@ -1351,7 +1351,7 @@ class PlayState extends MusicBeatState
 		}
 
 		inCutscene = false;
-		var ret:Dynamic = callOnLuas('onStartCountdown', [] ,false);
+		var ret:Dynamic = callOnLuas('onStartCountdown', []);
 		if(ret != FunkinLua.Function_Stop) {
 			#if android
                         androidc.visible = true;
@@ -3047,7 +3047,7 @@ class PlayState extends MusicBeatState
 		#end
 
 		#if LUA_ALLOWED
-		var ret:Dynamic = callOnLuas('onEndSong', [] ,false);
+		var ret:Dynamic = callOnLuas('onEndSong', []);
 		#else
 		var ret:Dynamic = FunkinLua.Function_Continue;
 		#end
