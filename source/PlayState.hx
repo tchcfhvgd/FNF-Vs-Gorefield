@@ -3037,7 +3037,7 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement([]);
+			var achieve:String = checkForAchievement();
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -3127,21 +3127,25 @@ class PlayState extends MusicBeatState
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
-							LoadingState.loadAndSwitchState(new LoadingScreen());
+							MusicBeatState.switchState(new LoadingScreen(
 						        storyPlaylist[0].toLowerCase(),
 							storyDifficulty, 
 							Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
 							true,
 							storyPlaylist
-						});
+						        )
+							);
+							});
 					} else {
 						cancelMusicFadeTween();
-						LoadingState.loadAndSwitchState(new LoadingScreen());
+				                MusicBeatState.switchState(new LoadingScreen(
 					        storyPlaylist[0].toLowerCase(),
 						storyDifficulty, 
 						Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
 						true,
 					        storyPlaylist
+					        )
+						);
 					}
 				}
 			}
