@@ -3046,7 +3046,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
-		var ret:Dynamic = callOnLuas('onEndSong', [], false);
+		var ret:Dynamic = callOnLuas('onEndSong', []);
 		if(ret != FunkinLua.Function_Stop && !transitioning) {
 			if (SONG.validScore)
 			{
@@ -3056,7 +3056,6 @@ class PlayState extends MusicBeatState
 				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
 				#end
 			}
-			playbackRate = 1;
 
 			if (chartingMode)
 			{
