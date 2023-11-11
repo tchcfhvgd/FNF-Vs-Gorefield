@@ -3020,7 +3020,7 @@ class PlayState extends MusicBeatState
 				return;
 			}
 		}
-		
+
 		timeBarBG.visible = false;
 		timeBar.visible = false;
 		timeTxt.visible = false;
@@ -3037,7 +3037,7 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement();
+			var achieve:String = checkForAchievement([]);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -3046,13 +3046,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
-		
-		#if LUA_ALLOWED
-		var ret:Dynamic = callOnLuas('onEndSong', []);
-		#else
-		var ret:Dynamic = FunkinLua.Function_Continue;
-		#end
-
+		var ret:Dynamic = callOnLuas('onEndSong', [], false);
 		if(ret != FunkinLua.Function_Stop && !transitioning) {
 			if (SONG.validScore)
 			{
@@ -3062,6 +3056,7 @@ class PlayState extends MusicBeatState
 				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
 				#end
 			}
+			playbackRate = 1;
 
 			if (chartingMode)
 			{
@@ -3078,6 +3073,7 @@ class PlayState extends MusicBeatState
 
 				if (storyPlaylist.length <= 0)
 				{
+					WeekData.loadTheFirstEnabledMod();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 					cancelMusicFadeTween();
@@ -3120,33 +3116,39 @@ class PlayState extends MusicBeatState
 					}
 
 					FlxTransitionableState.skipNextTransIn = true;
-					//FlxTransitionableState.skipNextTransOut = true;
+					FlxTransitionableState.skipNextTransOut = true;
 
 					prevCamFollow = camFollow;
 					prevCamFollowPos = camFollowPos;
 
+					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0] + difficulty, PlayState.storyPlaylist[0]);
 					FlxG.sound.music.stop();
 
-					cancelMusicFadeTween();
-							if(winterHorrorlandNext) {
-					                new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+					if(winterHorrorlandNext) {
+						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
-							MusicBeatState.switchState(new LoadingScreen(
-									storyPlaylist[0].toLowerCase(),
-									storyDifficulty, 
-									Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
-									true,
-									storyPlaylist
-									)
-								);
-							});
-						}
-
+							LoadingState.loadAndSwitchState(new LoadingScreen());
+						        storyPlaylist[0].toLowerCase(),
+							storyDifficulty, 
+							Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
+							true,
+							storyPlaylist
+						});
+					} else {
+						cancelMusicFadeTween();
+						LoadingState.loadAndSwitchState(new LoadingScreen());
+					        storyPlaylist[0].toLowerCase(),
+						storyDifficulty, 
+						Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
+						true,
+					        storyPlaylist
 					}
+				}
 			}
 			else
 			{
 				trace('WENT BACK TO FREEPLAY??');
+				WeekData.loadTheFirstEnabledMod();
 				cancelMusicFadeTween();
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
@@ -3158,6 +3160,7 @@ class PlayState extends MusicBeatState
 			transitioning = true;
 		}
 	}
+				
 		
 	#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementObject = null;
