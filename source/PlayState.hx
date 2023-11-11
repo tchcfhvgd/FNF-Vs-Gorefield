@@ -120,7 +120,6 @@ class PlayState extends MusicBeatState
 	public var songSpeedType:String = "multiplicative";
 	public var noteKillOffset:Float = 350;
 	
-	public var playbackRate(default, set):Float = 1;
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
@@ -3047,7 +3046,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
-		var ret:Dynamic = callOnLuas('onEndSong', []);
+		var ret:Dynamic = callOnLuas('onEndSong', [] ,false);
 		if(ret != FunkinLua.Function_Stop && !transitioning) {
 			if (SONG.validScore)
 			{
@@ -3058,7 +3057,6 @@ class PlayState extends MusicBeatState
 				#end
 			}
 
-			playbackRate = 1;
 			if (chartingMode)
 			{
 				openChartEditor();
@@ -3128,25 +3126,21 @@ class PlayState extends MusicBeatState
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
-							MusicBeatState.switchState(new LoadingScreen(
+							LoadingState.loadAndSwitchState(new LoadingScreen());
 						        storyPlaylist[0].toLowerCase(),
 							storyDifficulty, 
 							Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
 							true,
 							storyPlaylist
-						        )
-							);
 							});
 					} else {
 						cancelMusicFadeTween();
-				                MusicBeatState.switchState(new LoadingScreen(
+				                LoadingState.loadAndSwitchState(new LoadingScreen());
 					        storyPlaylist[0].toLowerCase(),
 						storyDifficulty, 
 						Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
 						true,
 					        storyPlaylist
-					        )
-						);
 					}
 				}
 			}
