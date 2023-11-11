@@ -1158,9 +1158,6 @@ class PlayState extends MusicBeatState
 		startAndEnd();
 		return;
 		#end
-		MusicBeatState.switchState(new CreditsState());
-		FlxG.sound.music.stop();
-		FlxG.sound.playMusic(Paths.music('freakyMenu'), 0.7);
 	}
 
 	public function startVideo(name:String):Void {
