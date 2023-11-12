@@ -3155,7 +3155,7 @@ class PlayState extends MusicBeatState
 					if (curSong == "Curious Cat") {
 					#if VIDEOS_ALLOWED
 					startVideo("transformationCinematic");
-					video.finishCallback = function() {
+					new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 										MusicBeatState.switchState(new LoadingScreen(
 												storyPlaylist[0].toLowerCase(),
 												storyDifficulty, 
