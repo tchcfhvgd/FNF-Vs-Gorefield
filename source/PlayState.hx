@@ -2958,7 +2958,7 @@ class PlayState extends MusicBeatState
 
 	function theEnd1():Void
 	{
-		startVideoEnd("transformationCinematic");
+		startVideo("transformationCinematic");
 	}
 
 	function finishSong1():Void
@@ -3004,6 +3004,10 @@ class PlayState extends MusicBeatState
 		{
 			switch (SONG.song)
 			{
+				case 'curious-cat':
+					{
+						finishCallback = theEnd1;
+					}
 				case 'Hi Jon':
 					{
 						finishCallback = theEnd;
@@ -3151,21 +3155,7 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.stop();
 
 	                                cancelMusicFadeTween();	
-					
-					if (curSong == "Curious Cat") {
-					startVideo("transformationCinematic");
-					new FlxTimer().start(111.5, function(tmr:FlxTimer) {
-						cancelMusicFadeTween();				
-						MusicBeatState.switchState(new LoadingScreen(
-						storyPlaylist[0].toLowerCase(),
-						storyDifficulty, 
-						Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
-						true,
-						storyPlaylist
-							)
-							);
-					                });
-					}
+			
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
