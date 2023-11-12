@@ -3155,19 +3155,19 @@ class PlayState extends MusicBeatState
 					if (curSong == "Curious Cat") {
 					#if VIDEOS_ALLOWED
 					startVideo("transformationCinematic");
-					new FlxTimer().start(1.5, function(tmr:FlxTimer) {
-										MusicBeatState.switchState(new LoadingScreen(
-												storyPlaylist[0].toLowerCase(),
-												storyDifficulty, 
-												Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
-												true,
-												storyPlaylist
-											)
-										);
+					new FlxTimer().start(11.5, function(tmr:FlxTimer) {
+						cancelMusicFadeTween();				
+						MusicBeatState.switchState(new LoadingScreen(
+						storyPlaylist[0].toLowerCase(),
+						storyDifficulty, 
+						Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
+						true,
+						storyPlaylist
+							)
+							);
 					                });
 					#end
 					}
-					else
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
