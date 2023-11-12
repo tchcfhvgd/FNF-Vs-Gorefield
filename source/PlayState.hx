@@ -3164,9 +3164,7 @@ class PlayState extends MusicBeatState
 												storyPlaylist
 											)
 										);
-								startAndEnd();
-			                                        return;	
-					                };
+					                });
 					#end
 					}
 					else
