@@ -3153,9 +3153,8 @@ class PlayState extends MusicBeatState
 	                                cancelMusicFadeTween();	
 					
 					if (curSong == "Curious Cat") {
-					#if VIDEOS_ALLOWED
 					startVideo("transformationCinematic");
-					new FlxTimer().start(11.5, function(tmr:FlxTimer) {
+					new FlxTimer().start(111.5, function(tmr:FlxTimer) {
 						cancelMusicFadeTween();				
 						MusicBeatState.switchState(new LoadingScreen(
 						storyPlaylist[0].toLowerCase(),
@@ -3166,7 +3165,6 @@ class PlayState extends MusicBeatState
 							)
 							);
 					                });
-					#end
 					}
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
