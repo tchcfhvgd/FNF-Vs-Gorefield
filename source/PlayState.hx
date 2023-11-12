@@ -3150,7 +3150,27 @@ class PlayState extends MusicBeatState
 					prevCamFollowPos = camFollowPos;
 					FlxG.sound.music.stop();
 
-	cancelMusicFadeTween();				
+	                                cancelMusicFadeTween();	
+					
+					if (curSong == "Curious Cat") {
+					#if VIDEOS_ALLOWED
+					startVideo("transformationCinematic");
+					video.finishCallback = function() {
+										MusicBeatState.switchState(new LoadingScreen(
+												storyPlaylist[0].toLowerCase(),
+												storyDifficulty, 
+												Highscore.formatSong(storyPlaylist[0].toLowerCase(), storyDifficulty),
+												true,
+												storyPlaylist
+											)
+										);
+								startAndEnd();
+			                                        return;	
+					                };
+					#end
+					}
+					else
+					{
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
@@ -3163,7 +3183,8 @@ class PlayState extends MusicBeatState
 							)
 							);
 							});
-					} else {
+					} 
+					}  else {
 						
      new FlxTimer().start(1.5, function(tmr:FlxTimer) {					cancelMusicFadeTween();
 				                MusicBeatState.switchState(new LoadingScreen(
